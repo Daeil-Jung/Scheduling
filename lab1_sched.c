@@ -32,4 +32,57 @@
  * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
  */
 
+typedef struct _node{
+	int value;
+	struct _node* next;
+}node;
 
+typedef node* nptr;
+
+typedef struct _queue{
+	int count;
+	nptr front;
+	nptr rear;
+}queue;
+
+void InitQueue(queue *q){
+	q->front = q->rear = NULL;
+	queue->count = 0;
+}
+
+int IsEmpty(queue *q){
+	return queue->count == 0;
+}
+
+void Enqueue(queue *q, int data){
+	node *now = (node *)malloc(sizeof(node));
+	now->value = data;
+	now->next = NULL;
+
+	if(IsEmpty(q)){
+		q->front = now;
+	}
+	else{
+		q->rear->next = now;
+	}
+	q->rear = now;
+	q->count++;
+}
+
+int Dequeue(queue *q){
+	int re = 0;
+	node *now;
+	if(IsEmpty(q)){
+		return re;
+	}
+	now = q->front;
+	re = now->data;
+	q->front = now->next;
+	free(now);
+	q->count--;
+	return re;
+}
+
+void FCFS(){
+	
+}

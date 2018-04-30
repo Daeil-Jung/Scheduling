@@ -34,6 +34,24 @@
  */
 
 int main(int argc, char *argv[]){
-   
+	int menu = 0;
+	printf("select simulation scheduling that you want to see.\n");
+	printf("1. FCFS  2. SJF  3. RR  4. MLFQ  5. Lottery\n");
+	scanf("%d", &menu);
+	while(menu!=6){
+		switch(menu){
+			case 1: FCFS();
+				break;
+			case 2: SJF();
+				break;
+			case 3: RR();
+				break;
+			case 4: MLFQ();
+				break;
+			case 5: Lotttery();
+				break;
+			default : printf("Plz put in value 1~5 :(");
+		}
+	}
+	return 0;
 }
-

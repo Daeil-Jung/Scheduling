@@ -13,6 +13,14 @@
 #ifndef _LAB1_HEADER_H
 #define _LAB1_HEADER_H
 
+int queueLevel 4;
+int timeQ 1;
+
+void FCFS();
+void SJF();
+void RR();
+void MLFQ;
+void Lottery();
 
 /*
  * You need to Declare functions in  here
