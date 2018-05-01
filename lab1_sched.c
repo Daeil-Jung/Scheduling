@@ -147,6 +147,7 @@ void SJF(){
 		for (proc = 0; proc < minservtime; proc++) { //in this case, proc has no means.
 			Enqueue(&q, minservQ);
 			serviceTime[minservQ]--;
+			time++;
 		}
 	}
 	printf("\n");
