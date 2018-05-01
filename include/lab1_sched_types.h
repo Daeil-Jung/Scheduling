@@ -14,7 +14,7 @@
 #define _LAB1_HEADER_H
 
 #define QUEUE_LEVEL 4
-#define TIMEQUANTUANT 1
+#define TIME_QUANT 1
 #define NUM_OF_PROC 5
 #define MAX_SERV_TIME 20
 
