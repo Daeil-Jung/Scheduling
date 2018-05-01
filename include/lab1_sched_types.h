@@ -26,6 +26,7 @@ typedef struct _node{
 typedef node* nptr;
 
 typedef struct _queue{
+	int count;
 	nptr front;
 	nptr rear;
 }queue;
