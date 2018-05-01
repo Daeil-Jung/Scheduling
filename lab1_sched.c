@@ -1,8 +1,8 @@
 /*
 *	DKU Operating System Lab
 *	    Lab1 (Scheduler Algorithm Simulator)
-*	    Student id : 
-*	    Student name : 
+*	    Student id : 32144204 
+*	    Student name : Daeil-Jung
 *
 *   lab1_sched.c :
 *       - Lab1 source file.
@@ -87,7 +87,7 @@ void FCFS(queue *q){
 	int time = 0;
 	int proc = 0;
 
-	printf("You select FCFS scheduling.\n");
+	printf("You select FCFS scheduling.\n  ");
 	for(time=0;time<maxservtime;time++){
 		printf("  %3d", time);
 	}
@@ -110,4 +110,39 @@ void FCFS(queue *q){
 	for(proc=0;proc<num_of_proc;proc++){
 		printQueue(&procQ, proc);	
 	}
+}
+
+void SJF(queue *q){
+	int time = 0;
+	int proc= 0;
+	queue procQ;
+	InitQueue(&procQ);
+
+	printf("You select SJF scheduling.\n  ");
+	for(time=0;time<maxservtime;time++){
+		printf("  %3d", time);
+	}
+	for(time=0;time<maxservtime;){
+		for(proc=0;proc<num_of_proc;proc++){
+			if((arrivalTime[proc]<=time)&&(servicetime[proc]!=0)){
+				if(IsEmpty(q))
+					Enqueue(q, proc);
+				else{
+					if(servicetime[q->first->value]<servicetime[proc]){
+						Dequeue(q);
+						Enqueue(q, proc);
+					}
+				}
+			}
+		}
+		while(servicetime[q->first->value]==0){
+			Enqueue(&procQ, q->first->value);
+			servicetime[q->first->value]--;
+			time++;
+		}
+		InitQueue(q);
+	}
+	printf("\n");
+	for(proc=0;proc<num_of_proc;proc++)
+		printQueue(&procQ, proc);
 }

@@ -35,22 +35,24 @@
 
 int main(int argc, char *argv[]){
 	int menu = 0;
+	queue presentQ;
+	InitQueue(&presentQ);
 	printf("select simulation scheduling that you want to see.\n");
-	printf("1. FCFS  2. SJF  3. RR  4. MLFQ  5. Lottery\n");
+	printf("1. FCFS  2. SJF  3. RR  4. MLFQ  5. Lottery  6.Exit\n");
 	scanf("%d", &menu);
 	while(menu!=6){
 		switch(menu){
-			case 1: FCFS();
+			case 1: FCFS(&presentQ);
 				break;
-			case 2: SJF();
+			case 2: SJF(&presentQ);
 				break;
-			case 3: RR();
+			case 3: RR(&presentQ);
 				break;
-			case 4: MLFQ();
+			case 4: MLFQ(&presentQ);
 				break;
-			case 5: Lotttery();
+			case 5: Lotttery(&presentQ);
 				break;
-			default : printf("Plz put in value 1~5 :(");
+			default : printf("Plz put in value 1~6 :(");
 		}
 	}
 	return 0;
