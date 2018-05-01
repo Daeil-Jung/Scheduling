@@ -92,7 +92,7 @@ void FCFS(){
 	InitQueue(&q);
 	InitQueue(&procQ);
 
-	printf("You select FCFS scheduling.\n  ");
+	printf("You select FCFS scheduling.\n");
 	for(time=0;time<MAX_SERV_TIME;time++){
 		printf("%3d", time);
 	}
@@ -118,36 +118,40 @@ void FCFS(){
 void SJF(){
 	int time = 0;
 	int proc= 0;
+	int arrivedQ[NUM_OF_PROC + 1];
+	int minservtime = 0;
+	int minservQ;
 	queue q;
-	queue procQ;
 	InitQueue(&q);
-	InitQueue(&procQ);
 
-	printf("You select SJF scheduling.\n  ");
+	printf("You select SJF scheduling.\n");
 	for(time=0;time<MAX_SERV_TIME;time++){
 		printf("%3d", time);
 	}
 	for(time=0;time<MAX_SERV_TIME;){
+		arrivedQ[0] = 0;
 		for(proc=0;proc<NUM_OF_PROC;proc++){
-			if((arrivalTime[proc]<=time)&&(serviceTime[proc]!=0)){
-				if(IsEmpty(&q))
-					Enqueue(&q, proc);
-				else if(serviceTime[(&q)->front->value]<serviceTime[proc]){
-						Dequeue(&q);
-						Enqueue(&q, proc);
-				}
+			if ((arrivalTime[proc] <= time) && (serviceTime[proc] != 0)) {
+				arrivedQ[0]++;
+				arrivedQ[(arrivedQ[0])] = proc;
 			}
 		}
-		while(serviceTime[(&q)->front->value]==0){
-			Enqueue(&procQ, (&q)->front->value);
-			serviceTime[(&q)->front->value]--;
-			time++;
+		minservtime = serviceTime[(arrivedQ[1])];
+		minservQ = arrivedQ[1];
+		for (proc = 2; proc <= arrivedQ[0]; proc++) { //in this case, proc has no means.
+			if (minservtime > serviceTime[(arrivedQ[proc])]) {
+				minservtime = serviceTime[(arrivedQ[proc])];
+				minservQ = arrivedQ[proc];
+			}
 		}
-		InitQueue(&q);
+		for (proc = 0; proc < minservtime; proc++) { //in this case, proc has no means.
+			Enqueue(&q, minservQ);
+			serviceTime[minservQ]--;
+		}
 	}
 	printf("\n");
 	for(proc=0;proc<NUM_OF_PROC;proc++)
-		printQueue(&procQ, proc);
+		printQueue(&q, proc);
 }
 
 void RR(){
@@ -159,7 +163,7 @@ void RR(){
 	InitQueue(&q);
 	InitQueue(&procQ);
 
-	printf("You select RR scheduling.\n  ");
+	printf("You select RR scheduling.\n");
 	for(time=0;time<MAX_SERV_TIME;time++)
 		printf("%3d", time);
 	for(time=0;time<MAX_SERV_TIME;time++){
@@ -187,7 +191,7 @@ void MLFQ(){
 	for(i=0;i<QUEUE_LEVEL;i++)
 		InitQueue(&procQ[i]);
 	
-	printf("You select MLFQ scheduling.\n  ");
+	printf("You select MLFQ scheduling.\n");
 	for(time=0;time<MAX_SERV_TIME;time++)
 		printf("%3d", time);
 	for(time=0;time<MAX_SERV_TIME;time++)
