@@ -13,10 +13,10 @@
 #ifndef _LAB1_HEADER_H
 #define _LAB1_HEADER_H
 
-#define queueLevel 4
-#define timeQ 1
-#define num_of_proc 5
-#define maxservtime 20
+#define QUEUE_LEVEL 4
+#define TIMEQUANTUANT 1
+#define NUM_OF_PROC 5
+#define MAX_SERV_TIME 20
 
 typedef struct _node{
 	int value;
@@ -26,7 +26,6 @@ typedef struct _node{
 typedef node* nptr;
 
 typedef struct _queue{
-	int count;
 	nptr front;
 	nptr rear;
 }queue;
@@ -37,16 +36,16 @@ void Enqueue(queue *q, int data);
 int Dequeue(queue *q);
 void printQueue(queue *q, int a);
 
-int arrivalTime[num_of_proc];
-int serviceTime[num_of_proc];
-int tickets[num_of_proc];
+int arrivalTime[NUM_OF_PROC];
+int serviceTime[NUM_OF_PROC];
+int tickets[NUM_OF_PROC];
 
-void FCFS(queue *q);
-void SJF(queue *q);
-void RR(queue *q);
+void FCFS();
+void SJF();
+void RR();
 /*
-void MLFQ(queue *q);
-void Lottery(queue *q);
+void MLFQ();
+void Lottery();
 */
 /*
  * You need to Declare functions in  here

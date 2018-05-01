@@ -76,47 +76,51 @@ void printQueue(queue *q, int a){
 	nptr now = q->front;
 	for(time = 0;time<maxservtime;time++){
 		if(now->value == a)
-			printf("  O");
+			printf(" O ");
 		else
-			printf("  X");
+			printf(" X ");
 		now = now->next;
 	}
 	printf("\n");
 }
 
-void FCFS(queue *q){
+void FCFS(){
 	int time = 0;
 	int proc = 0;
+	queue q;
+	queue procQ;
+	InitQueue(&q);
+	InitQueue(&procQ);
 
 	printf("You select FCFS scheduling.\n  ");
 	for(time=0;time<maxservtime;time++){
 		printf("%3d", time);
 	}
 
-	queue procQ;
-	InitQueue(&procQ);
 	for(time=0;time<maxservtime;time++){
-		for(proc = 0; proc < num_of_proc; proc++){
+		for(proc = 0; proc < NUM_OF_PROC; proc++){
 			if(arrivalTime[proc] == time){
-				Enqueue(q, proc);
+				Enqueue(&q, proc);
 			}
 		}
-		Enqueue(&procQ, q->front->value);
-		serviceTime[q->front->value]--;
-		if((serviceTime[q->front->value]) == 0){
-			Dequeue(q);
+		Enqueue(&procQ, &q->front->value);
+		serviceTime[&q->front->value]--;
+		if((serviceTime[&q->front->value]) == 0){
+			Dequeue(&q);
 		}
 	}
 	printf("\n");
-	for(proc=0;proc<num_of_proc;proc++){
+	for(proc=0;proc<NUM_OF_PROC;proc++){
 		printQueue(&procQ, proc);	
 	}
 }
 
-void SJF(queue *q){
+void SJF(){
 	int time = 0;
 	int proc= 0;
+	queue q;
 	queue procQ;
+	InitQueue(&q);
 	InitQueue(&procQ);
 
 	printf("You select SJF scheduling.\n  ");
@@ -124,75 +128,78 @@ void SJF(queue *q){
 		printf("%3d", time);
 	}
 	for(time=0;time<maxservtime;){
-		for(proc=0;proc<num_of_proc;proc++){
+		for(proc=0;proc<NUM_OF_PROC;proc++){
 			if((arrivalTime[proc]<=time)&&(serviceTime[proc]!=0)){
-				if(IsEmpty(q))
-					Enqueue(q, proc);
-				else if(serviceTime[q->front->value]<serviceTime[proc]){
-						Dequeue(q);
-						Enqueue(q, proc);
+				if(IsEmpty(&q))
+					Enqueue(&q, proc);
+				else if(serviceTime[&q->front->value]<serviceTime[proc]){
+						Dequeue(&q);
+						Enqueue(&q, proc);
 					}
 				}
 			}
 		}
-		while(serviceTime[q->front->value]==0){
-			Enqueue(&procQ, q->front->value);
-			serviceTime[q->front->value]--;
+		while(serviceTime[&q->front->value]==0){
+			Enqueue(&procQ, &q->front->value);
+			serviceTime[&q->front->value]--;
 			time++;
 		}
-		InitQueue(q);
+		InitQueue(&q);
 	}
 	printf("\n");
-	for(proc=0;proc<num_of_proc;proc++)
+	for(proc=0;proc<NUM_OF_PROC;proc++)
 		printQueue(&procQ, proc);
 }
 
-void RR(queue *q){
+void RR(){
 	int time = 0;
 	int proc = 0;
 	int temp;
+	queue q;
 	queue procQ;
+	InitQueue(&q);
 	InitQueue(&procQ);
 
 	printf("You select RR scheduling.\n  ");
 	for(time=0;time<maxservtime;time++)
 		printf("%3d", time);
 	for(time=0;time<maxservtime;time++){
-		for(proc=0;proc<num_of_proc;proc++){
+		for(proc=0;proc<NUM_OF_PROC;proc++){
 			if(arrivalTime[proc]==time)
-				Enqueue(q, proc);
+				Enqueue(&q, proc);
 		}
 		if((time!=0)&&(serviceTime[temp]!=0))
-			Enqueue(q, temp);
-		Enqueue(&procQ, q->front->value);
-		serviceTime[q->front->value]--;
-		temp = Dequeue(q);
+			Enqueue(&q, temp);
+		Enqueue(&procQ, &q->front->value);
+		serviceTime[&q->front->value]--;
+		temp = Dequeue(&q);
 	}
 	printf("\n");
-	for(proc=0;proc<num_of_proc;proc++)
+	for(proc=0;proc<NUM_OF_PROC;proc++)
 		printQueue(&procQ, proc);
 }
 /*
-void MLFQ(queue *q){
+void MLFQ(){
 	int time = 0;
 	int proc = 0;
-	queue procQ[queueLevel];
+	queue q;
+	queue procQ[QUEUE_LEVEL];
 	int i;
-	for(i=0;i<queueLevel;i++)
+	for(i=0;i<QUEUE_LEVEL;i++)
 		InitQueue(&procQ[i]);
 	
 	printf("You select MLFQ scheduling.\n  ");
 	for(time=0;time<maxservtime;time++)
 		printf("%3d", time);
 	for(time=0;time<maxservtime;time++)
-		for(proc=0;proc<num_of_proc;proc++){
+		for(proc=0;proc<NUM_OF_PROC;proc++){
 			if(arrivalTime[proc]==time)
 				Enqueue(&procQ[0],proc);
 
 
 }
 
-void Lottery(queue *q){
+void Lottery(){
 	
 }
 
