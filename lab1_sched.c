@@ -89,7 +89,7 @@ void FCFS(queue *q){
 
 	printf("You select FCFS scheduling.\n  ");
 	for(time=0;time<maxservtime;time++){
-		printf("  %3d", time);
+		printf("%3d", time);
 	}
 
 	queue procQ;
@@ -120,7 +120,7 @@ void SJF(queue *q){
 
 	printf("You select SJF scheduling.\n  ");
 	for(time=0;time<maxservtime;time++){
-		printf("  %3d", time);
+		printf("%3d", time);
 	}
 	for(time=0;time<maxservtime;){
 		for(proc=0;proc<num_of_proc;proc++){
@@ -141,6 +141,32 @@ void SJF(queue *q){
 			time++;
 		}
 		InitQueue(q);
+	}
+	printf("\n");
+	for(proc=0;proc<num_of_proc;proc++)
+		printQueue(&procQ, proc);
+}
+
+void RR(queue *q){
+	int time = 0;
+	int proc = 0;
+	int temp;
+	queue procQ;
+	InitQueue(&procQ);
+
+	printf("You select RR scheduling.\n  ");
+	for(time=0;time<maxservtime;time++)
+		printf("%3d", time);
+	for(time=0;time<maxservtime;time++){
+		for(proc=0;proc<num_of_proc;proc++){
+			if(arrivalTime[proc]==time)
+				Enqueue(q, proc);
+		}
+		if((time!=0)&&(servicetime[temp]!=0))
+			Enqueue(q, temp);
+		Enqueue(&procQ, q->first->value);
+		servicetime[q->first->value]--;
+		temp = Dequeue(q);
 	}
 	printf("\n");
 	for(proc=0;proc<num_of_proc;proc++)
