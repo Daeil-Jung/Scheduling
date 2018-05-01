@@ -102,8 +102,8 @@ void FCFS(queue *q){
 			}
 		}
 		Enqueue(&procQ, q->front->value);
-		serviceTime[q->front->value];
-		if((q->front->value) == 0){
+		serviceTime[q->front->value]--;
+		if((serviceTime[q->front->value]) == 0){
 			Dequeue(q);
 		}
 	}
@@ -128,8 +128,7 @@ void SJF(queue *q){
 			if((arrivalTime[proc]<=time)&&(serviceTime[proc]!=0)){
 				if(IsEmpty(q))
 					Enqueue(q, proc);
-				else{
-					if(serviceTime[q->front->value]<serviceTime[proc]){
+				else if(serviceTime[q->front->value]<serviceTime[proc]){
 						Dequeue(q);
 						Enqueue(q, proc);
 					}
