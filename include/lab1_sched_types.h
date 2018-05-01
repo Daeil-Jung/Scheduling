@@ -13,10 +13,10 @@
 #ifndef _LAB1_HEADER_H
 #define _LAB1_HEADER_H
 
-int queueLevel 4;
-int timeQ 1;
-int num_of_proc 5;
-int maxservtime 20;
+#define queueLevel 4
+#define timeQ 1
+#define num_of_proc 5
+#define maxservtime 20
 
 typedef struct _node{
 	int value;
@@ -33,7 +33,7 @@ typedef struct _queue{
 
 void InitQueue(queue *q);
 int IsEmpty(queue *q);
-void Enqueue(queue *q);
+void Enqueue(queue *q, int data);
 int Dequeue(queue *q);
 void printQueue(queue *q, int a);
 

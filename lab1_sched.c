@@ -34,11 +34,11 @@
 
 void InitQueue(queue *q){
 	q->front = q->rear = NULL;
-	queue->count = 0;
+	q->count = 0;
 }
 
 int IsEmpty(queue *q){
-	return queue->count == 0;
+	return q->count == 0;
 }
 
 void Enqueue(queue *q, int data){
@@ -63,7 +63,7 @@ int Dequeue(queue *q){
 		return re;
 	}
 	now = q->front;
-	re = now->data;
+	re = now->value;
 	q->front = now->next;
 	free(now);
 	q->count--;
@@ -100,8 +100,8 @@ void FCFS(queue *q){
 				Enqueue(q, proc);
 			}
 		}
-		InitQueue(&procQ, q->front->value);
-		servicetime[q->front->value];
+		Enqueue(&procQ, q->front->value);
+		serviceTime[q->front->value];
 		if((q->front->value) == 0){
 			Dequeue(q);
 		}
@@ -124,20 +124,20 @@ void SJF(queue *q){
 	}
 	for(time=0;time<maxservtime;){
 		for(proc=0;proc<num_of_proc;proc++){
-			if((arrivalTime[proc]<=time)&&(servicetime[proc]!=0)){
+			if((arrivalTime[proc]<=time)&&(serviceTime[proc]!=0)){
 				if(IsEmpty(q))
 					Enqueue(q, proc);
 				else{
-					if(servicetime[q->first->value]<servicetime[proc]){
+					if(serviceTime[q->front->value]<serviceTime[proc]){
 						Dequeue(q);
 						Enqueue(q, proc);
 					}
 				}
 			}
 		}
-		while(servicetime[q->first->value]==0){
-			Enqueue(&procQ, q->first->value);
-			servicetime[q->first->value]--;
+		while(serviceTime[q->front->value]==0){
+			Enqueue(&procQ, q->front->value);
+			serviceTime[q->front->value]--;
 			time++;
 		}
 		InitQueue(q);
@@ -162,10 +162,10 @@ void RR(queue *q){
 			if(arrivalTime[proc]==time)
 				Enqueue(q, proc);
 		}
-		if((time!=0)&&(servicetime[temp]!=0))
+		if((time!=0)&&(serviceTime[temp]!=0))
 			Enqueue(q, temp);
-		Enqueue(&procQ, q->first->value);
-		servicetime[q->first->value]--;
+		Enqueue(&procQ, q->front->value);
+		serviceTime[q->front->value]--;
 		temp = Dequeue(q);
 	}
 	printf("\n");
