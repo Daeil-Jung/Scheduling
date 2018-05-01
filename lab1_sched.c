@@ -32,19 +32,6 @@
  * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
  */
 
-typedef struct _node{
-	int value;
-	struct _node* next;
-}node;
-
-typedef node* nptr;
-
-typedef struct _queue{
-	int count;
-	nptr front;
-	nptr rear;
-}queue;
-
 void InitQueue(queue *q){
 	q->front = q->rear = NULL;
 	queue->count = 0;
@@ -83,6 +70,44 @@ int Dequeue(queue *q){
 	return re;
 }
 
-void FCFS(){
-	
+void printQueue(queue *q, int a){
+	printf("%c", (a+65));
+	int time = 0;
+	nptr now = q->front;
+	for(time = 0;time<maxservtime;time++){
+		if(now->value == a)
+			printf("  O");
+		else
+			printf("  X");
+		now = now->next;
+	}
+}
+
+void FCFS(queue *q){
+	int time = 0;
+	int proc = 0;
+
+	printf("You select FCFS scheduling.\n");
+	for(time=0;time<maxservtime;time++){
+		printf("  %3d", time);
+	}
+
+	queue procQ;
+	InitQueue(&procQ);
+	for(time=0;time<maxservtime;time++){
+		for(proc = 0; proc < num_of_proc; proc++){
+			if(arrivalTime[proc] == time){
+				Enqueue(q, proc);
+			}
+		}
+		InitQueue(&procQ, q->front->value);
+		servicetime[q->front->value];
+		if((q->front->value) == 0){
+			Dequeue(q);
+		}
+	}
+	printf("\n");
+	for(proc=0;proc<num_of_proc;proc++){
+		printQueue(&procQ, proc);	
+	}
 }
