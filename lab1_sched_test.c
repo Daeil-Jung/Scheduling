@@ -33,6 +33,10 @@
  *
  */
 
+arrivalTime[num_of_proc] = {0, 2, 4, 6, 8};
+serviceTime[num_of_proc] = {3, 6, 4, 5, 2};
+tickets[num_of_proc] = {3, 5, 4, 6, 2};
+
 int main(int argc, char *argv[]){
 	int menu = 0;
 	queue presentQ;
@@ -40,20 +44,19 @@ int main(int argc, char *argv[]){
 	printf("select simulation scheduling that you want to see.\n");
 	printf("1. FCFS  2. SJF  3. RR  4. MLFQ  5. Lottery  6.Exit\n");
 	scanf("%d", &menu);
-	while(menu!=6){
-		switch(menu){
-			case 1: FCFS(&presentQ);
-				break;
-			case 2: SJF(&presentQ);
-				break;
-			case 3: RR(&presentQ);
-				break;
-			case 4: MLFQ(&presentQ);
-				break;
-			case 5: Lotttery(&presentQ);
-				break;
-			default : printf("Plz put in value 1~6 :(");
-		}
+
+	switch(menu){
+		case 1: FCFS(&presentQ);
+			break;
+		case 2: SJF(&presentQ);
+			break;
+		case 3: RR(&presentQ);
+			break;/*
+		case 4: MLFQ(&presentQ);
+			break;
+		case 5: Lotttery(&presentQ);
+			break;*/
+		default : printf("Plz put in value 1~6 :(");
 	}
 	return 0;
 }

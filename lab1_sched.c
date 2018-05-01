@@ -81,6 +81,7 @@ void printQueue(queue *q, int a){
 			printf("  X");
 		now = now->next;
 	}
+	printf("\n");
 }
 
 void FCFS(queue *q){
@@ -172,3 +173,28 @@ void RR(queue *q){
 	for(proc=0;proc<num_of_proc;proc++)
 		printQueue(&procQ, proc);
 }
+/*
+void MLFQ(queue *q){
+	int time = 0;
+	int proc = 0;
+	queue procQ[queueLevel];
+	int i;
+	for(i=0;i<queueLevel;i++)
+		InitQueue(&procQ[i]);
+	
+	printf("You select MLFQ scheduling.\n  ");
+	for(time=0;time<maxservtime;time++)
+		printf("%3d", time);
+	for(time=0;time<maxservtime;time++)
+		for(proc=0;proc<num_of_proc;proc++){
+			if(arrivalTime[proc]==time)
+				Enqueue(&procQ[0],proc);
+
+
+}
+
+void Lottery(queue *q){
+	
+}
+
+*/

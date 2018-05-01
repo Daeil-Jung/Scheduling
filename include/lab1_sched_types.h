@@ -37,15 +37,17 @@ void Enqueue(queue *q, int data);
 int Dequeue(queue *q);
 void printQueue(queue *q, int a);
 
-int arrivalTime[num_of_proc] = {0, 2, 4, 6, 8};
-int serviceTime[num_of_proc] = {3, 6, 4, 5, 2};
+int arrivalTime[num_of_proc];
+int serviceTime[num_of_proc];
+int tickets[num_of_proc];
 
 void FCFS(queue *q);
 void SJF(queue *q);
 void RR(queue *q);
+/*
 void MLFQ(queue *q);
 void Lottery(queue *q);
-
+*/
 /*
  * You need to Declare functions in  here
  */
