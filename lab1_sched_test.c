@@ -1,8 +1,8 @@
 /*
 *	DKU Operating System Lab
 *	    Lab1 (Scheduler Algorithm Simulator)
-*	    Student id : 
-*	    Student name : 
+*	    Student id : 32144204
+*	    Student name : Daeil-Jung
 *
 *   lab1_sched.c :
 *       - Lab1 source file.
@@ -28,14 +28,9 @@
 
 #include "lab1_sched_types.h"
 
-/*
- * you need to implement scheduler simlator test code.
- *
- */
-
-arrivalTime[NUM_OF_PROC] = {0, 2, 4, 6, 8};
-serviceTime[NUM_OF_PROC] = {3, 6, 4, 5, 2};
-tickets[NUM_OF_PROC] = {3, 5, 4, 6, 2};
+int arrivalTime[NUM_OF_PROC] = {0, 2, 4, 6, 8};
+int serviceTime[NUM_OF_PROC] = {3, 6, 4, 5, 2};
+int tickets[NUM_OF_PROC] = {3, 5, 4, 6, 2};
 
 int main(int argc, char *argv[]){
 	int menu = 0;

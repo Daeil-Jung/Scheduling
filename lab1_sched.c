@@ -28,10 +28,6 @@
 
 #include "lab1_sched_types.h"
 
-/*
- * you need to implement FCFS, RR, SPN, SRT, HRRN, MLFQ scheduler. 
- */
-
 void InitQueue(queue *q){
 	q->front = q->rear = NULL;
 	q->count = 0;
@@ -158,13 +154,15 @@ void SJF(){
 void RR(){
 	int time = 0;
 	int proc = 0;
-	int temp;
+	int temp = 0;
+	int exectime = 0;
 	queue q;
 	queue procQ;
 	InitQueue(&q);
 	InitQueue(&procQ);
 
 	printf("You select RR scheduling.\n");
+	printf("Time quantum is %d.", TIME_QUANT);
 	for(time=0;time<MAX_SERV_TIME;time++)
 		printf("%3d", time);
 	for(time=0;time<MAX_SERV_TIME;time++){
@@ -172,11 +170,19 @@ void RR(){
 			if(arrivalTime[proc]==time)
 				Enqueue(&q, proc);
 		}
-		if((time!=0)&&(serviceTime[temp]!=0))
+		if (((time != 0) && (serviceTime[temp] != 0)) && (exectime == TIME_QUANT)) {
 			Enqueue(&q, temp);
+			exectime = 0;
+		}
+		else if ((serviceTime[temp] == 0) {
+			exectime = 0;
+			serviceTime[temp] = -1;
+		}
 		Enqueue(&procQ, (&q)->front->value);
 		serviceTime[(&q)->front->value]--;
-		temp = Dequeue(&q);
+		exectime++;
+		if((exectime == TIME_QUANT)||(serviceTime[(&q)->front->value)])
+			temp = Dequeue(&q);
 	}
 	printf("\n");
 	for(proc=0;proc<NUM_OF_PROC;proc++)
@@ -193,12 +199,16 @@ void MLFQ(){
 		InitQueue(&procQ[i]);
 	
 	printf("You select MLFQ scheduling.\n");
+	printf("Time quantum is %d. Queue leveil is %d.", TIME_QUANT, QUEUE_LEVEL);
 	for(time=0;time<MAX_SERV_TIME;time++)
 		printf("%3d", time);
-	for(time=0;time<MAX_SERV_TIME;time++)
-		for(proc=0;proc<NUM_OF_PROC;proc++){
-			if(arrivalTime[proc]==time)
-				Enqueue(&procQ[0],proc);
+	for(time=0;time<MAX_SERV_TIME;time++){
+		for (proc = 0; proc < NUM_OF_PROC; proc++) {
+			if (arrivalTime[proc] == time)
+				Enqueue(&procQ[0], proc);
+		}
+
+	}
 
 
 }

@@ -43,9 +43,9 @@ int tickets[NUM_OF_PROC];
 
 void FCFS();
 void SJF();
-void RR();
-/*
+void RR();/*
 void MLFQ();
+
 void Lottery();
 */
 /*
