@@ -174,14 +174,14 @@ void RR(){
 			Enqueue(&q, temp);
 			exectime = 0;
 		}
-		else if ((serviceTime[temp] == 0) {
+		else if (serviceTime[temp] == 0) {
 			exectime = 0;
 			serviceTime[temp] = -1;
 		}
 		Enqueue(&procQ, (&q)->front->value);
 		serviceTime[(&q)->front->value]--;
 		exectime++;
-		if((exectime == TIME_QUANT)||(serviceTime[(&q)->front->value)])
+		if((exectime == TIME_QUANT)||(serviceTime[(&q)->front->value]))
 			temp = Dequeue(&q);
 	}
 	printf("\n");
