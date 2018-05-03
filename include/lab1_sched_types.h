@@ -44,14 +44,8 @@ int tickets[NUM_OF_PROC];
 void FCFS();
 void SJF();
 void RR();
-void MLFQ();/*
-
+void MLFQ();
 void Lottery();
-*/
-/*
- * You need to Declare functions in  here
- */
-
 
 #endif /* LAB1_HEADER_H*/
 

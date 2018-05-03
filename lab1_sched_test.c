@@ -30,7 +30,7 @@
 
 int arrivalTime[NUM_OF_PROC] = {0, 2, 4, 6, 8};
 int serviceTime[NUM_OF_PROC] = {3, 6, 4, 5, 2};
-int tickets[NUM_OF_PROC] = {3, 5, 4, 6, 2};
+int tickets[NUM_OF_PROC] = {100, 150, 400, 300, 50};
 
 int main(int argc, char *argv[]){
 	int menu = 0;
@@ -46,9 +46,9 @@ int main(int argc, char *argv[]){
 		case 3: RR();
 			break;
 		case 4: MLFQ();
-			break;/*
+			break;
 		case 5: Lotttery();
-			break;*/
+			break;
 		default : printf("Plz put in value 1~5 :(");
 	}
 	return 0;
