@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
 			break;
 		case 4: MLFQ();
 			break;
-		case 5: Lotttery();
+		case 5: Lottery();
 			break;
 		default : printf("Plz put in value 1~5 :(");
 	}

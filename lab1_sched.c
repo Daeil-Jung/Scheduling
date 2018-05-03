@@ -238,7 +238,7 @@ void MLFQ(){
 }
 
 void Lottery(){
-	int time = 0;
+	int timei = 0;
 	int proc = 0;
 	int sum = 0;
 	int temp = 0;
@@ -251,17 +251,17 @@ void Lottery(){
 	srand(time(NULL));
 
 	printf("You select Lottery scheduling.\n");
-	for (time = 0; time<MAX_SERV_TIME; time++)
-		printf("%3d", time);
-	for (time = 0; time < MAX_SERV_TIME; time++) {
+	for (timei = 0; timei<MAX_SERV_TIME; timei++)
+		printf("%3d", timei);
+	for (timei = 0; timei < MAX_SERV_TIME; timei++) {
 		for (proc = 0; proc < NUM_OF_PROC; proc++)
-			if (arrivalTime[proc] == time) {
+			if (arrivalTime[proc] == timei) {
 				Enqueue(&procQ, proc);
 				Enqueue(&ticketQ, tickets[proc]);
 				sum += tickets[proc];
 			}
 		temp = rand() % sum;
-		while (temp < (&ticketQ)->front->value) {
+		while (temp >= (&ticketQ)->front->value) {
 			proc = Dequeue(&procQ);
 			Enqueue(&procQ, proc);
 			proc = Dequeue(&ticketQ);
@@ -276,4 +276,7 @@ void Lottery(){
 			sum -= tickets[proc];
 		}
 	}
+	printf("\n");
+	for(proc=0;proc<NUM_OF_PROC;proc++)
+		printQueue(&q, proc);
 }
