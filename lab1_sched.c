@@ -162,7 +162,7 @@ void RR(){
 	InitQueue(&procQ);
 
 	printf("You select RR scheduling.\n");
-	printf("Time quantum is %d.", TIME_QUANT);
+	printf("Time quantum is %d.\n", TIME_QUANT);
 	for(time=0;time<MAX_SERV_TIME;time++)
 		printf("%3d", time);
 	for(time=0;time<MAX_SERV_TIME;time++){
@@ -188,10 +188,13 @@ void RR(){
 	for(proc=0;proc<NUM_OF_PROC;proc++)
 		printQueue(&procQ, proc);
 }
-/*
+
 void MLFQ(){
 	int time = 0;
 	int proc = 0;
+	int temp = 0;
+	int l - 0;
+	int exectime = 0;
 	queue q;
 	queue procQ[QUEUE_LEVEL];
 	int i;
@@ -199,7 +202,7 @@ void MLFQ(){
 		InitQueue(&procQ[i]);
 	
 	printf("You select MLFQ scheduling.\n");
-	printf("Time quantum is %d. Queue leveil is %d.", TIME_QUANT, QUEUE_LEVEL);
+	printf("Time quantum is %d. Queue leveil is %d.\n", TIME_QUANT, QUEUE_LEVEL);
 	for(time=0;time<MAX_SERV_TIME;time++)
 		printf("%3d", time);
 	for(time=0;time<MAX_SERV_TIME;time++){
@@ -207,12 +210,32 @@ void MLFQ(){
 			if (arrivalTime[proc] == time)
 				Enqueue(&procQ[0], proc);
 		}
+		for (l == 0; l < QUEUE_LEVEL; l++) {
+			if ((&procQ[l])->count != 0) {
+				Enqueue(&q, (&procQ[l])->front->value);
+				exectime++;
+				if ((serviceTime[(&procQ[l])->front->value]) == 0) {
+					Dequeue(&procQ[l]);
+					exectime = 0;
+				}
+				else if (exectime==TIME_QUANT) {
+					temp = Dequeue(&procQ[l]);
+					if (l < (QUEUE_LEVEL - 1))
+						Enqueue(&procQ[l + 1], temp);
+					else
+						Enqueue(&procQ[l], temp);
+					exectime = 0;
+				}
+				break;
+			}
+		}
 
 	}
-
-
+	printf("\n");
+	for (proc = 0; proc<NUM_OF_PROC; proc++)
+		printQueue(&procQ, proc);
 }
-
+/*
 void Lottery(){
 	
 }
